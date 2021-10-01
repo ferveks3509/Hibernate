@@ -8,26 +8,22 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import javax.persistence.Query;
 import java.util.List;
 
 public class HibernateRun {
+
+    private static final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+            .configure().build();
+    private static final SessionFactory sf = new MetadataSources(registry)
+            .buildMetadata().buildSessionFactory();
+
     public static void main(String[] args) {
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure().build();
         try {
-            SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-            Item item = create(new Item("Learn Hibernate"), sf);
-            System.out.println(item);
-            item.setName("Learn Hibernate 5.");
-            update(item, sf);
-            System.out.println(item);
-            Item rsl = findById(item.getId(), sf);
-            System.out.println(rsl);
             for (Item it : findAll(sf)) {
                 System.out.println(it);
             }
-            delete(rsl.getId(), sf);
-
+            System.out.println(findByName("Update"));
         }  catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -35,16 +31,17 @@ public class HibernateRun {
         }
     }
 
-    public static Item create(Item item, SessionFactory sf) {
-        Session session = sf.openSession();
-        session.beginTransaction();
-        session.save(item);
-        session.getTransaction().commit();
-        session.close();
-        return item;
+    public static Item create(Item item) {
+            Session session = sf.openSession();
+            session.beginTransaction();
+            session.save(item);
+            session.getTransaction().commit();
+            session.close();
+            return item;
+
     }
 
-    public static void update(Item item, SessionFactory sf) {
+    public static void update(Item item) {
         Session session = sf.openSession();
         session.beginTransaction();
         session.update(item);
@@ -52,7 +49,7 @@ public class HibernateRun {
         session.close();
     }
 
-    public static void delete(Integer id, SessionFactory sf) {
+    public static void delete(Integer id) {
         Session session = sf.openSession();
         session.beginTransaction();
         Item item = new Item(null);
@@ -71,12 +68,21 @@ public class HibernateRun {
         return result;
     }
 
-    public static Item findById(Integer id, SessionFactory sf) {
+    public static Item findById(Integer id) {
         Session session = sf.openSession();
         session.beginTransaction();
         Item result = session.get(Item.class, id);
         session.getTransaction().commit();
         session.close();
         return result;
+    }
+    public static List<Item> findByName(String name) {
+        Session session = sf.openSession();
+        Query query = session.createQuery("from Item i where i.name = :name");
+        query.setParameter("name", name);
+        List rsl = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return rsl;
     }
 }
