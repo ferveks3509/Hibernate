@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -10,6 +11,14 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    private Timestamp created;
+
+    public static Item of(String name, Timestamp created) {
+        Item item = new Item();
+        item.name = name;
+        item.created = created;
+        return item;
+    }
 
     public Item() {
 
