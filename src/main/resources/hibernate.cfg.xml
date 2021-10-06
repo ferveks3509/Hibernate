@@ -21,6 +21,8 @@
         <mapping class="model.User" />
         <mapping class="model.Unidirectional.Car" />
         <mapping class="model.Unidirectional.CarMark" />
+        <mapping class="model.Unidirectional.ManyToMany.Address" />
+        <mapping class="model.Unidirectional.ManyToMany.Person" />
 
     </session-factory>
 </hibernate-configuration>

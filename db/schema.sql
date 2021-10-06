@@ -27,3 +27,12 @@ create table car(
     id serial primary key,
     name varchar(200)
 );
+create table address(
+    id serial primary key,
+    street varchar(200),
+    number varchar(200)
+);
+create table person (
+    in serial primary key,
+    name varchar(200)
+);
