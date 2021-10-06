@@ -19,5 +19,8 @@
         <mapping class="model.Item" />
         <mapping class="model.Role" />
         <mapping class="model.User" />
+        <mapping class="model.Unidirectional.Car" />
+        <mapping class="model.Unidirectional.CarMark" />
+
     </session-factory>
 </hibernate-configuration>

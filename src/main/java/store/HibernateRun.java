@@ -13,17 +13,19 @@ import java.util.List;
 
 public class HibernateRun {
 
-    private static final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-            .configure().build();
-    private static final SessionFactory sf = new MetadataSources(registry)
-            .buildMetadata().buildSessionFactory();
+
 
     public static void main(String[] args) {
+         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure().build();
         try {
+            final SessionFactory sf = new MetadataSources(registry)
+                    .buildMetadata().buildSessionFactory();
+
             for (Item it : findAll(sf)) {
                 System.out.println(it);
             }
-            System.out.println(findByName("Update"));
+            System.out.println(findByName("Update", sf));
         }  catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -31,7 +33,7 @@ public class HibernateRun {
         }
     }
 
-    public static Item create(Item item) {
+    public static Item create(Item item, SessionFactory sf) {
             Session session = sf.openSession();
             session.beginTransaction();
             session.save(item);
@@ -41,7 +43,7 @@ public class HibernateRun {
 
     }
 
-    public static void update(Item item) {
+    public static void update(Item item, SessionFactory sf) {
         Session session = sf.openSession();
         session.beginTransaction();
         session.update(item);
@@ -49,7 +51,7 @@ public class HibernateRun {
         session.close();
     }
 
-    public static void delete(Integer id) {
+    public static void delete(Integer id, SessionFactory sf) {
         Session session = sf.openSession();
         session.beginTransaction();
         Item item = new Item(null);
@@ -68,7 +70,7 @@ public class HibernateRun {
         return result;
     }
 
-    public static Item findById(Integer id) {
+    public static Item findById(Integer id, SessionFactory sf) {
         Session session = sf.openSession();
         session.beginTransaction();
         Item result = session.get(Item.class, id);
@@ -76,7 +78,7 @@ public class HibernateRun {
         session.close();
         return result;
     }
-    public static List<Item> findByName(String name) {
+    public static List<Item> findByName(String name, SessionFactory sf) {
         Session session = sf.openSession();
         Query query = session.createQuery("from Item i where i.name = :name");
         query.setParameter("name", name);

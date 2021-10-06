@@ -17,3 +17,13 @@ create table j_user (
     name varchar(2000),
     role_id int not null references j_role(id)
 );
+
+create table carMark(
+    id serial primary key,
+    name varchar(200)
+);
+
+create table car(
+    id serial primary key,
+    name varchar(200)
+);
