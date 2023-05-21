@@ -1,7 +1,7 @@
 package store;
 
-import model.LazyInitializationexception.Category;
-import model.LazyInitializationexception.Task;
+import LazyInitializationexception.Category;
+import LazyInitializationexception.Task;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;

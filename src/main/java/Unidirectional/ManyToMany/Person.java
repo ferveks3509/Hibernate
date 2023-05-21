@@ -1,4 +1,4 @@
-package model.Unidirectional.ManyToMany;
+package Unidirectional.ManyToMany;
 
 import javax.persistence.*;
 import java.util.ArrayList;

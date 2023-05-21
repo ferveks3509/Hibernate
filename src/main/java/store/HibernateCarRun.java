@@ -1,7 +1,7 @@
 package store;
 
-import model.Unidirectional.Car;
-import model.Unidirectional.CarMark;
+import Unidirectional.Car;
+import Unidirectional.CarMark;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;

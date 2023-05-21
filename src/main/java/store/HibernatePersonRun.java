@@ -1,7 +1,7 @@
 package store;
 
-import model.Unidirectional.ManyToMany.Address;
-import model.Unidirectional.ManyToMany.Person;
+import Unidirectional.ManyToMany.Address;
+import Unidirectional.ManyToMany.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;

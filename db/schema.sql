@@ -6,7 +6,7 @@ create table cars(
     id serial primary key,
     model varchar(255),
     created TIMESTAMP
-)
+);
 create table j_role (
     id serial primary key,
      name varchar(2000)
@@ -33,6 +33,6 @@ create table address(
     number varchar(200)
 );
 create table person (
-    in serial primary key,
+    id serial primary key,
     name varchar(200)
 );

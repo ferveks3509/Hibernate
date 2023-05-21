@@ -1,4 +1,4 @@
-package model.Unidirectional;
+package Unidirectional;
 
 import javax.persistence.*;
 import java.util.Objects;

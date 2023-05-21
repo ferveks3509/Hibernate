@@ -19,10 +19,10 @@
         <mapping class="model.Item" />
         <mapping class="model.Role" />
         <mapping class="model.User" />
-        <mapping class="model.Unidirectional.Car" />
-        <mapping class="model.Unidirectional.CarMark" />
-        <mapping class="model.Unidirectional.ManyToMany.Address" />
-        <mapping class="model.Unidirectional.ManyToMany.Person" />
+        <mapping class="Unidirectional.Car" />
+        <mapping class="Unidirectional.CarMark" />
+        <mapping class="Unidirectional.ManyToMany.Address" />
+        <mapping class="Unidirectional.ManyToMany.Person" />
 
     </session-factory>
 </hibernate-configuration>

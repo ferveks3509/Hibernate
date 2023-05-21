@@ -1,4 +1,4 @@
-package model.LazyInitializationexception;
+package LazyInitializationexception;
 
 import javax.persistence.*;
 import java.util.Objects;
