@@ -1,6 +1,8 @@
 package model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,11 +17,31 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role roleId;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "j_user_id")
+    private List<UserMessenger> messengers = new ArrayList<>();
+
     public static User of(String name, Role role) {
         User user = new User();
         user.name = name;
         user.roleId = role;
         return user;
+    }
+
+    public Role getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Role roleId) {
+        this.roleId = roleId;
+    }
+
+    public List<UserMessenger> getMessengers() {
+        return messengers;
+    }
+
+    public void setMessengers(List<UserMessenger> messengers) {
+        this.messengers = messengers;
     }
 
     public int getId() {
