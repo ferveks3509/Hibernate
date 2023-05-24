@@ -50,3 +50,10 @@ create table j_user_notification
     identify  text,
     j_user_id int REFERENCES j_user (id)
 );
+CREATE TABLE participates
+(
+    id      serial PRIMARY KEY,
+    item_id int not null REFERENCES items (id),
+    user_id int not null REFERENCES j_user (id),
+    UNIQUE (item_id, user_id)
+);

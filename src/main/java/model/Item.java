@@ -2,6 +2,8 @@ package model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +15,14 @@ public class Item {
     private String name;
     private Timestamp created;
 
+    @ManyToMany
+    @JoinTable(
+            name = "participates",
+            joinColumns = { @JoinColumn(name = "item_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
+    private List<User> participates = new ArrayList<>();
+
     public static Item of(String name, Timestamp created) {
         Item item = new Item();
         item.name = name;
@@ -22,6 +32,22 @@ public class Item {
 
     public Item() {
 
+    }
+
+    public List<User> getParticipates() {
+        return participates;
+    }
+
+    public void setParticipates(List<User> participates) {
+        this.participates = participates;
+    }
+
+    public Timestamp getCreated() {
+        return created;
+    }
+
+    public void setCreated(Timestamp created) {
+        this.created = created;
     }
 
     public Item(String name) {
